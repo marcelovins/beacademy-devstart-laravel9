@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,16 @@ Route::get('/', function () {
 Route::get('/hello-world', function () {
     echo '<h1>hello world!</h1>';
 });
+
+// Route::get('/users/{nome}', function ($nome) {
+//     echo "<h1>$nome</h1>";
+// });
+
+// php artisan make:controller NomeDoController  (para criar controllers)
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+
+
+
+
