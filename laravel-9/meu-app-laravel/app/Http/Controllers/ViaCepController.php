@@ -24,3 +24,6 @@ class ViaCepController extends Controller
         
     }
 }
+
+//o banco de dados é configurado no arquivo env. na pasta raiz
+
