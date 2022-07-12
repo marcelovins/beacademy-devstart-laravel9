@@ -36,6 +36,10 @@ class StoreUpdateUserFormRequest extends FormRequest
                 'required',
                 'min:4',
                 'max:12'
+            ],
+            'image' => [
+                'file',
+                // 'mimes:jpeg,jpg,csv'
             ]
         ];
 
@@ -50,3 +54,11 @@ class StoreUpdateUserFormRequest extends FormRequest
         return $rules;
     }
 }
+
+// php artisan make:request StoreUpdateUserFormRequest
+
+// php artisan migrate
+
+// php artisan make:migration add_field_image_to_users_table
+
+// php artisan storage:link

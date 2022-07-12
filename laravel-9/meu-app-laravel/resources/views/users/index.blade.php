@@ -16,7 +16,11 @@
         <tbody class="table-group-divider">
             @foreach ($users as $user)
                 <tr>
-                    <th scope="row">{{$user->id}}</th>
+                    @if($user->image)
+                        <th><img src="{{ asset('storage/' .$user->image) }}" width="50px" height="50px" class="rounded-circle"></th>
+                    @else
+                    <th><img src="{{ asset('storage/profile/avatar.png') }}" width="50px" height="50px" class="rounded-circle"></th>
+                    @endif
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{date('d/m/Y', strtotime($user->created_at))}}</td>
@@ -25,4 +29,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="justify-content-center pagination">
+        {{ $users->links('pagination::bootstrap-4') }}
+    </div>
 @endsection
+
+<!-- php artisan db:seed -->
