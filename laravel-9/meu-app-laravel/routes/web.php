@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
+    LoginController,
     PostController,
     UserController,
     ViaCepController
@@ -18,9 +19,9 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/hello-world', function () {
 //     echo '<h1>hello world!</h1>';
@@ -31,6 +32,9 @@ Route::get('/', function () {
 // });
 
 // php artisan make:controller NomeDoController  (para criar controllers)
+
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+Route::post('/', [LoginController::class, 'auth'])->name('login.auth');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('users/{id}/posts', [PostController::class, 'show'])->name('posts.show');

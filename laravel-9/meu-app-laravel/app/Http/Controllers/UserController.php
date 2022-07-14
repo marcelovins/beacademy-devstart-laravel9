@@ -69,7 +69,8 @@ class UserController extends Controller
     //    $user->save(); //maneira 1 de fazer chamada de dados para o banco;
 
     $data = $request->all();
-    $data['password'] = bcrypt($request->password);
+    $data['password'] = $request->password;
+    // bcrypt($request->password);
 
     if($request->image){
         $file = $request['image'];
@@ -102,7 +103,8 @@ class UserController extends Controller
         
         $data = $request->only('name', 'email');
         if($request->password)
-        $data['password'] = bcrypt($request->password);
+        $data['password'] = $request->password;
+        // bcrypt($request->password);
 
         $user->update($data);
 
