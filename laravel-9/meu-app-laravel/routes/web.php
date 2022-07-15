@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LoginAccessMiddleware;
 use App\Http\Controllers\{
     LoginController,
     PostController,
@@ -36,22 +37,25 @@ use App\Http\Controllers\{
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
 Route::post('/', [LoginController::class, 'auth'])->name('login.auth');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('users/{id}/posts', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware(LoginAccessMiddleware::class);
+Route::get('users/{id}/posts', [PostController::class, 'show'])->name('posts.show')->middleware(LoginAccessMiddleware::class);
 
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware(LoginAccessMiddleware::class);
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update')->middleware(LoginAccessMiddleware::class);
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware(LoginAccessMiddleware::class);
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware(LoginAccessMiddleware::class);
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware(LoginAccessMiddleware::class);
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show')->middleware(LoginAccessMiddleware::class);
+Route::post('/users', [UserController::class, 'store'])->name('users.store')->middleware(LoginAccessMiddleware::class);
 
 
 
 //Via Cep Web Service
-Route::get('/viacep', [ViaCepController::class, 'index'])->name('viacep.index');
-Route::post('/viacep', [ViaCepController::class, 'index'])->name('viacep.index.post');
-Route::get('/viacep/{cep}', [ViaCepController::class, 'show'])->name('viacep.show');
+// Route::get('/viacep', [ViaCepController::class, 'index'])->name('viacep.index');
+// Route::post('/viacep', [ViaCepController::class, 'index'])->name('viacep.index.post');
+// Route::get('/viacep/{cep}', [ViaCepController::class, 'show'])->name('viacep.show');
+
+// fazer o model e já criar a migration
+// php artisan make:model NomeModel -m
 
 
