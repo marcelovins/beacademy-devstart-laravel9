@@ -7,16 +7,16 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function index(Request $request)
-    {
-        $erro = '';
+    // public function index(Request $request)
+    // {
+    //     $erro = '';
         
-        if($request->get('erro') == 1 ){
-            $erro = 'usuário ou senha não existe';
-        }
+    //     if($request->get('erro') == 1 ){
+    //         $erro = 'usuário ou senha não existe';
+    //     }
 
-        return view('login.index', ['erro' => $erro]);
-    }
+    //     return view('login.index', ['erro' => $erro]);
+    // }
 
     public function auth(Request $request)
     {
@@ -50,6 +50,21 @@ class LoginController extends Controller
                 return redirect()->route('login.index', ['erro' => 1]);
         }
 
-        print_r($exist);
+        
+
+        // print_r($exist);
+    }
+
+    public function index(Request $request)
+    {
+        $erro = '';
+        
+        if($request->get('erro') == 1 ){
+            $erro = 'usuário ou senha não existe';
+        }
+
+        echo $erro;
+
+        return view('login.index', ['erro' => $erro]);
     }
 }
