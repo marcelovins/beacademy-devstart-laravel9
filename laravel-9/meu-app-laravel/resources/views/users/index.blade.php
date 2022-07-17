@@ -1,7 +1,7 @@
 @extends('template.users')
 @section('title', 'Clientes')
 @section('body')
-    <h1 class= "">Clientes</h1>
+    <h1 class= "">Cadastro de Clientes</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm mt-2 mb-5">
