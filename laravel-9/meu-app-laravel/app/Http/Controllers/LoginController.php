@@ -40,14 +40,20 @@ class LoginController extends Controller
 
         $users = new User();
 
-        $exist = $users->where('email', $email)->where('password', $password)->get()->first();
+        $exist = $users->where('email', $email)
+                       ->where('password', $password)
+                       ->get()->first();
 
         if(isset($exist->email))
         {
-            echo 'usuário existe';
+            session_start();
+            $_SESSION['email'] = $exist->email;
+            $_SESSION['password'] = $exist->password;
+            
+            return redirect()->route('users.index');
         }
         else {
-                return redirect()->route('login.index', ['erro' => 1]);
+                return redirect()->route('login.auth', ['erro' => 1]);
         }
 
         
@@ -63,8 +69,19 @@ class LoginController extends Controller
             $erro = 'usuário ou senha não existe';
         }
 
-        echo $erro;
+        if($request->get('erro') == 2 ){
+            $erro = 'necessário realizar login para ter acesso';
+        }
+
+        // echo $erro;
 
         return view('login.index', ['erro' => $erro]);
+    }
+
+    public function exit()
+    {
+        session_destroy();
+
+        return redirect()->route('login.auth');
     }
 }

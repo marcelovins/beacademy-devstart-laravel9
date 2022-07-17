@@ -1,11 +1,11 @@
 @extends('template.users')
-@section('title', 'Usuários')
+@section('title', 'Clientes')
 @section('body')
-    <h1 class= "">Usuários</h1>
+    <h1 class= "">Clientes</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm mt-2 mb-5">
-                <a href="{{route('users.create')}}" class= "btn btn-secondary">Novo Usuário</a>
+                <a href="{{route('users.create')}}" class= "btn btn-secondary">Novo Cliente</a>
             </div>
             <div class="col-sm mt-2 mb-5">
                 <form action="{{ route('users.index') }}" method="GET">

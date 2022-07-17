@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\LoginAccess;
 
-class LoginAccessMiddleware
+class AuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,17 @@ class LoginAccessMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        session_start();
+
+        if(isset($_SESSION['email']) && $_SESSION['email'] != '')
+        {
+            // return response('tá parando aqui');
+           return $next($request); 
+        }
+        else{
+            return redirect()->route('login.auth', ['erro' => 2]);
+        }
         // return $next($request);
-        $ip = $request->server->get('REMOTE_ADDR');
-        $route = $request->getRequestUri();
-        LoginAccess::create(['log' => "$ip requisitou a rota $route"]);
-        return Response('chegamos no middleware');
-        // return $next($request);
+        // return Response('chegamos no auth middleware');
     }
 }

@@ -8,6 +8,14 @@ use App\Http\Requests\StoreUpdateUserFormRequest;
 
 class UserController extends Controller
 {
+
+    // usando o kernel é possível apelidar a rota do middleware
+
+    // public function __construct() 
+    // {
+    //     $this->middleware('log.access');
+    // }
+
     public function __construct(User $user)
     {
         $this->model = $user;
